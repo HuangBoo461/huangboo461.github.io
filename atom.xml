@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oiyou.net/"/>
-  <updated>2019-12-18T15:31:10.670Z</updated>
+  <updated>2019-12-18T16:43:15.042Z</updated>
   <id>http://blog.oiyou.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网页标题搞怪特效</title>
+    <link href="http://blog.oiyou.net/2019/12/19/201912190030/"/>
+    <id>http://blog.oiyou.net/2019/12/19/201912190030/</id>
+    <published>2019-12-18T16:27:30.000Z</published>
+    <updated>2019-12-18T16:43:15.042Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍下如何给Hexo NexT 主题中添加网页标题特效</p><a id="more"></a><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><h5 id="新增tittlecheat-js"><a href="#新增tittlecheat-js" class="headerlink" title="新增tittlecheat.js"></a>新增tittlecheat.js</h5><p> 在next\source\js\oiyou文件夹下创建tittlecheat.js，添加代码： </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--崩溃欺骗--&gt;</span><br><span class="line">&lt;!--其中注释部分需要jquery--&gt;</span><br><span class="line"> <span class="keyword">var</span> OriginTitle = <span class="built_in">document</span>.title;</span><br><span class="line"> <span class="keyword">var</span> titleTime;</span><br><span class="line"> <span class="built_in">document</span>.addEventListener(<span class="string">'visibilitychange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (<span class="built_in">document</span>.hidden) &#123;</span><br><span class="line">         <span class="comment">//$('[rel="icon"]').attr('href', "/img/TEP.ico");</span></span><br><span class="line">         <span class="built_in">document</span>.title = <span class="string">'╭(°A°`)╮ 页面崩溃啦 ~'</span>;</span><br><span class="line">         clearTimeout(titleTime);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="comment">//$('[rel="icon"]').attr('href', "/favicon.ico");</span></span><br><span class="line">         <span class="built_in">document</span>.title = <span class="string">'(ฅ&gt;ω&lt;*ฅ) 噫又好了~'</span> + OriginTitle;</span><br><span class="line">         titleTime = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">             <span class="built_in">document</span>.title = OriginTitle;</span><br><span class="line">         &#125;, <span class="number">2000</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure><h5 id="添加引用"><a href="#添加引用" class="headerlink" title="添加引用"></a>添加引用</h5><p> 在next\layout\_layout.swig文件中，添加引用（注：在swig末尾添加）： </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--崩溃欺骗--&gt;</span><br><span class="line">  &lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"/js/oiyou/tittlecheat.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure><h5 id="引入jquery-可选"><a href="#引入jquery-可选" class="headerlink" title="引入jquery(可选)"></a>引入jquery(可选)</h5><p>首先下载jquery-3.4.1.min.js保存至next\source\js\jquery(路径可自己选,但是要引用正确)</p><p>在next\layout_partials\head\head.swig文件中，添加引用（注：在swig末尾添加）： </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- jquery --&gt;</span><br><span class="line">&lt;script src=<span class="string">"/js/jquery/jquery-3.4.1.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure><p>参考:<a href="https://asdfv1929.github.io/2018/01/25/crash-cheat/" target="_blank" rel="noopener"> https://asdfv1929.github.io/2018/01/25/crash-cheat/ </a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍下如何给Hexo NexT 主题中添加网页标题特效&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://blog.oiyou.net/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://blog.oiyou.net/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>gitalk自动初始化</title>
