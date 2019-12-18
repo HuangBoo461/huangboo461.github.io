@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Little By Little</title>
+  
+  <subtitle>不积跬步无以至千里,不积小流无以成江海</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-12-18T14:23:06.404Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>oiyou</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>201912181630</title>
+    <link href="http://yoursite.com/2019/12/18/201912181630/"/>
+    <id>http://yoursite.com/2019/12/18/201912181630/</id>
+    <published>2019-12-18T08:29:26.000Z</published>
+    <updated>2019-12-18T14:23:06.404Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://yoursite.com/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://yoursite.com/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>github博客开启gitalk</title>
+    <link href="http://yoursite.com/2019/12/18/201912181600/"/>
+    <id>http://yoursite.com/2019/12/18/201912181600/</id>
+    <published>2019-12-18T08:01:42.000Z</published>
+    <updated>2019-12-18T14:23:06.403Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://yoursite.com/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://yoursite.com/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>修改npm安装路径</title>
+    <link href="http://yoursite.com/2019/12/16/%E4%BF%AE%E6%94%B9npm%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84/"/>
+    <id>http://yoursite.com/2019/12/16/%E4%BF%AE%E6%94%B9npm%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84/</id>
+    <published>2019-12-15T16:53:25.000Z</published>
+    <updated>2019-12-18T14:23:06.409Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="修改npm安装路径"><a href="#修改npm安装路径" class="headerlink" title="修改npm安装路径"></a>修改npm安装路径</h3><p>​    对于新手来的我说:修改之后，自定义安装的命令无法执行，我就直接把这里注释掉了，安装的时候默认是nodejs安装路径\node_modules下，就可以直接使用</p><pre><code>&lt;!-- more --&gt;这里还是贴出修改方法，待以后深入后寻找原因：npm默认安装路径为${APPDATA}\npm，对于一个强迫症而言是很不爽的，这里介绍下如何修改。通过配置文件(路径:nodejs安装路径\node_modules\npm\npmrc)修改如下即可: prefix = D:\nodejs\npm修改完成后可使用 npm root -g查看</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;修改npm安装路径&quot;&gt;&lt;a href=&quot;#修改npm安装路径&quot; class=&quot;headerlink&quot; title=&quot;修改npm安装路径&quot;&gt;&lt;/a&gt;修改npm安装路径&lt;/h3&gt;&lt;p&gt;​    对于新手来的我说:修改之后，自定义安装的命令无法执行，我就直接把这里注释掉
+      
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://yoursite.com/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://yoursite.com/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>github+hexo部署博客</title>
+    <link href="http://yoursite.com/2019/12/16/github-hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2019/12/16/github-hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/</id>
+    <published>2019-12-15T16:52:26.000Z</published>
+    <updated>2019-12-18T14:23:06.406Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="github-hexo部署博客"><a href="#github-hexo部署博客" class="headerlink" title="github+hexo部署博客"></a>github+hexo部署博客</h2><p>本问讲述如何使用github+hexo搭建静态博客</p><a id="more"></a><h3 id="1、github创建仓库"><a href="#1、github创建仓库" class="headerlink" title="1、github创建仓库"></a>1、github创建仓库</h3><h3 id="2、博客开发"><a href="#2、博客开发" class="headerlink" title="2、博客开发"></a>2、博客开发</h3><h4 id="1、安装nodejs"><a href="#1、安装nodejs" class="headerlink" title="1、安装nodejs"></a>1、安装nodejs</h4><p>​        注意:对于新手来说，如果想要修改npm安装路径，只需要将npmc中配置(路径:nodejs安装路径\node_modules\npm\npmrc)注释即可,默认路径即为nodejs安装路径\node_modules下。</p><h4 id="2、安装hexo-cli"><a href="#2、安装hexo-cli" class="headerlink" title="2、安装hexo-cli"></a>2、安装hexo-cli</h4><p>​    使用npm安装hexo</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli #-g参数含义:</span><br></pre></td></tr></table></figure><p>​    安装成功后，初始化博客</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure><p>​    执行完毕后会生成blog文件夹</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br></pre></td></tr></table></figure><p> 检测我们的网站雏形，分别按顺序输入以下三条命令： </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure><p>​    访问地址localhost:4000,出现以下即为成功</p><p><img src="https://i.loli.net/2019/12/17/plYwhdiq3AX2QVT.png" alt="blog"></p><p> 现在来介绍常用的Hexo 命令</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g #安装Hexo</span><br><span class="line">npm update hexo -g #升级</span><br><span class="line">hexo init #初始化博客</span><br></pre></td></tr></table></figure><p>​    命令简写</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章</span><br><span class="line">hexo g == hexo generate #生成</span><br><span class="line">hexo s == hexo server #启动服务预览</span><br><span class="line">hexo d == hexo deploy #部署</span><br><span class="line"></span><br><span class="line">hexo server #Hexo会监视文件变动并自动更新，无须重启服务器</span><br><span class="line">hexo server -s #静态模式</span><br><span class="line">hexo server -p 5000 #更改端口</span><br><span class="line">hexo server -i 192.168.1.1 #自定义 IP</span><br><span class="line">hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令</span><br></pre></td></tr></table></figure><p>刚刚的三个命令依次是新建一篇博客文章、生成网页、在本地预览的操作。 </p><h3 id="3、推送网站"><a href="#3、推送网站" class="headerlink" title="3、推送网站"></a>3、推送网站</h3><p> 上面只是在本地预览，接下来要做的就是就是推送网站，也就是发布网站，让我们的网站可以被更多的人访问。在设置之前，需要解释一个概念，在blog根目录里的_config.yml文件称为<strong>站点</strong>配置文件，如下图 </p><p><img src="https://i.loli.net/2019/12/17/6gfBFOGIK2bdSqu.png" alt="image-20191216000532449">进入根目录里的themes文件夹，里面也有个_config.yml文件，这个称为<strong>主题</strong>配置文件，如下图</p><p><img src="https://i.loli.net/2019/12/17/6hj4JGBlo2kFSDn.png" alt="theme"></p><p>下一步将我们的Hexo与GitHub关联起来，打开站点的配置文件_config.yml，翻到最后修改为：</p><p>deploy:<br>type: git<br>repo: 这里填入你之前在GitHub上创建仓库的完整路径，记得加上 .git<br>branch: master参考如下：</p><p><img src="https://i.loli.net/2019/12/17/hUoYSXKBkGOPFI8.png" alt="config"></p><p>保存站点配置文件。</p><p>其实就是给hexo d 这个命令做相应的配置，让hexo知道你要把blog部署在哪个位置，很显然，我们部署在我们GitHub的仓库里。最后安装Git部署插件，输入命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p> 这时，我们分别输入三条命令 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p> 其实第三条的 hexo d 就是部署网站命令，d是deploy的缩写。完成后，打开浏览器，在地址栏输入你的放置个人网站的仓库路径.</p><h3 id="4、绑定域名"><a href="#4、绑定域名" class="headerlink" title="4、绑定域名"></a>4、绑定域名</h3><h3 id="5、-更换主题"><a href="#5、-更换主题" class="headerlink" title="5、 更换主题"></a>5、 <strong>更换主题</strong></h3><p> 如果你不喜欢Hexo默认的主题，可以更换不同的主题，主题传送门：<a href="https://link.zhihu.com/?target=https%3A//hexo.io/themes/" target="_blank" rel="noopener">Themes</a> 我自己使用的是Next主题，可以在blog目录中的themes文件夹中查看你自己主题是什么。现在把默认主题更改成Next主题，在blog目录中（就是命令行的位置处于blog目录）打开命令行输入： </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure><p> 这是将Next主题下载到blog目录的themes主题下的next文件夹中。打开<strong>站点</strong>的_config.yml配置文件，修改主题为next </p><p><img src="https://i.loli.net/2019/12/17/o2BUimYyFN5xaI3.png" alt="修改主题"></p><p>参考地址: <a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26625249</a> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;github-hexo部署博客&quot;&gt;&lt;a href=&quot;#github-hexo部署博客&quot; class=&quot;headerlink&quot; title=&quot;github+hexo部署博客&quot;&gt;&lt;/a&gt;github+hexo部署博客&lt;/h2&gt;&lt;p&gt;本问讲述如何使用github+hexo搭建静态博客&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://yoursite.com/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://yoursite.com/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用github自建博客时遇到一个坑</title>
+    <link href="http://yoursite.com/2019/07/18/%E4%BD%BF%E7%94%A8github%E8%87%AA%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%97%B6%E9%81%87%E5%88%B0%E4%B8%80%E4%B8%AA%E5%9D%91/"/>
+    <id>http://yoursite.com/2019/07/18/%E4%BD%BF%E7%94%A8github%E8%87%AA%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%97%B6%E9%81%87%E5%88%B0%E4%B8%80%E4%B8%AA%E5%9D%91/</id>
+    <published>2019-07-18T09:45:09.000Z</published>
+    <updated>2019-12-18T14:23:06.407Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="配置发布路径"><a href="#配置发布路径" class="headerlink" title="配置发布路径"></a>配置发布路径</h3><p>​        在使用hexo d 命令时，什么输出都没有，也没有报错，这是要检查下配置文件里面的空格问题</p><p><img src="https://i.loli.net/2019/12/17/zEG1g5ln46tTJkp.png" alt="配置"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;配置发布路径&quot;&gt;&lt;a href=&quot;#配置发布路径&quot; class=&quot;headerlink&quot; title=&quot;配置发布路径&quot;&gt;&lt;/a&gt;配置发布路径&lt;/h3&gt;&lt;p&gt;​        在使用hexo d 命令时，什么输出都没有，也没有报错，这是要检查下配置文件里面的空格问题
+      
+    
+    </summary>
+    
+    
+      <category term="github blog" scheme="http://yoursite.com/categories/github-blog/"/>
+    
+    
+      <category term="github博客" scheme="http://yoursite.com/tags/github%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+</feed>
