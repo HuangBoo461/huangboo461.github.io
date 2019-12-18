@@ -46,15 +46,21 @@
   };
 </script>
 
-  <meta name="keywords" content="github博客">
+  <meta name="description" content="记录github博客开启gitalkgitalk： 一个基于 Github Issue 和 Preact 开发的评论插件,方便用户交流">
+<meta name="keywords" content="github博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="github博客开启gitalk">
+<meta property="og:title" content="github博客(nexT主题)开启gitalk">
 <meta property="og:url" content="http://blog.oiyou.net/2019/12/18/201912181600/index.html">
 <meta property="og:site_name" content="Little By Little">
+<meta property="og:description" content="记录github博客开启gitalkgitalk： 一个基于 Github Issue 和 Preact 开发的评论插件,方便用户交流">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-18T14:23:06.403Z">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/g9uPEXhZvHa6DsG.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/niLWRtDcrmKuVae.png">
+<meta property="og:updated_time" content="2019-12-18T15:26:44.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github博客开启gitalk">
+<meta name="twitter:title" content="github博客(nexT主题)开启gitalk">
+<meta name="twitter:description" content="记录github博客开启gitalkgitalk： 一个基于 Github Issue 和 Preact 开发的评论插件,方便用户交流">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/18/g9uPEXhZvHa6DsG.png">
 
 <link rel="canonical" href="http://blog.oiyou.net/2019/12/18/201912181600/">
 
@@ -68,7 +74,7 @@
   };
 </script>
 
-  <title>github博客开启gitalk | Little By Little</title>
+  <title>github博客(nexT主题)开启gitalk | Little By Little</title>
   
 
 
@@ -195,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          github博客开启gitalk
+          github博客(nexT主题)开启gitalk
         </h1>
 
         <div class="post-meta">
@@ -206,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-18 16:01:42 / 修改时间：22:23:06" itemprop="dateCreated datePublished" datetime="2019-12-18T16:01:42+08:00">2019-12-18</time>
+              <time title="创建时间：2019-12-18 16:01:42 / 修改时间：23:26:44" itemprop="dateCreated datePublished" datetime="2019-12-18T16:01:42+08:00">2019-12-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +237,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h3 id="记录github博客开启gitalk"><a href="#记录github博客开启gitalk" class="headerlink" title="记录github博客开启gitalk"></a>记录github博客开启gitalk</h3><p>gitalk： 一个基于 Github Issue 和 Preact 开发的评论插件,方便用户交流</p>
+<a id="more"></a>
+
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>注册github OAuth Apps <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">链接</a> </p>
+<p><img src="https://i.loli.net/2019/12/18/g9uPEXhZvHa6DsG.png" alt="注册信息填写"></p>
+<p>点击注册后跳转到成功页面</p>
+<p><img src="https://i.loli.net/2019/12/18/niLWRtDcrmKuVae.png" alt="注册成功"></p>
+<p>修改主题下配置文件(netx/_config.yml)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gitalk:</span><br><span class="line">  enable: true</span><br><span class="line">  github_id: github账号 # 如huangboo461</span><br><span class="line">  repo: 仓库名称 # 如huangboo461.github.io</span><br><span class="line">  client_id: Client ID # GitHub Application Client ID</span><br><span class="line">  client_secret: Client Secret # GitHub Application Client Secret</span><br><span class="line">  admin_user: github帐号 # 指定可初始化评论账户</span><br><span class="line">  distraction_free_mode: true</span><br><span class="line">  # 设置语言: en | es-ES | fr | ru | zh-CN | zh-TW</span><br><span class="line">  language: zh-CN</span><br></pre></td></tr></table></figure>
+
+<p>至此gitalk开启成功。</p>
+<p>此时博客页面需要登录github初始化才行，并且每篇博客都要重新初始化，下篇介绍如何自动初始化。</p>
+<p>参考地址 <a href="https://asdfv1929.github.io/2018/01/20/gitalk/" target="_blank" rel="noopener"> https://asdfv1929.github.io/2018/01/20/gitalk/ </a></p>
+<p>注:参考以上地址开启gitalk时，发现使用最新next主题只需要配置即可。</p>
+
     </div>
 
     
@@ -253,8 +273,8 @@
       <i class="fa fa-chevron-left"></i> 修改npm安装路径
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/12/18/201912181630/" rel="next" title="201912181630">
-      201912181630 <i class="fa fa-chevron-right"></i>
+    <a href="/2019/12/18/201912181630/" rel="next" title="gitalk自动初始化">
+      gitalk自动初始化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -316,6 +336,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录github博客开启gitalk"><span class="nav-number">1.</span> <span class="nav-text">记录github博客开启gitalk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
