@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.oiyou.net/tags/index.html</loc>
+    
+    <lastmod>2019-12-19T00:08:39.566Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.oiyou.net/categories/index.html</loc>
     
     <lastmod>2019-12-18T23:57:15.296Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://blog.oiyou.net/2019/12/16/%E4%BF%AE%E6%94%B9npm%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84/</loc>
     
     <lastmod>2019-12-18T15:24:24.148Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.oiyou.net/tags/index.html</loc>
-    
-    <lastmod>2019-12-18T14:23:06.413Z</lastmod>
     
   </url>
   
