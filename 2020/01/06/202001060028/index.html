@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.oiyou.net').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+<!-- jquery -->
+<script src="/js/jquery/jquery-3.4.1.min.js"></script>
+
+  <meta name="description" content="本文介绍下SpringBoot中如何对这几者的注册与使用 SpringBoot有两种方式注册Servlet、Filter、Listener 1、代码注册：使用 ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean进行注册； 2、 在 SpringBootApplication上添加@Ser">
+<meta name="keywords" content="springboot基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet、Filter、Intecepter、Listener">
+<meta property="og:url" content="http://blog.oiyou.net/2020/01/06/202001060028/index.html">
+<meta property="og:site_name" content="Little By Little">
+<meta property="og:description" content="本文介绍下SpringBoot中如何对这几者的注册与使用 SpringBoot有两种方式注册Servlet、Filter、Listener 1、代码注册：使用 ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean进行注册； 2、 在 SpringBootApplication上添加@Ser">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2020/01/06/lJxNGtdCDTiqewh.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/06/HDvUX8AfayQiSjw.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/06/Z5cmX7lDiV8Cwke.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/07/SgU8Q7vfzKxs6rL.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/07/l4VFQaWyS3BoNhZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/07/JbWqdz5QSeiIGNP.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/08/MkOCaXVv941tRjz.png">
+<meta property="og:image" content="https://i.loli.net/2020/01/08/OW1F3sRae4wNDzh.png">
+<meta property="og:updated_time" content="2020-01-07T17:00:27.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet、Filter、Intecepter、Listener">
+<meta name="twitter:description" content="本文介绍下SpringBoot中如何对这几者的注册与使用 SpringBoot有两种方式注册Servlet、Filter、Listener 1、代码注册：使用 ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean进行注册； 2、 在 SpringBootApplication上添加@Ser">
+<meta name="twitter:image" content="https://i.loli.net/2020/01/06/lJxNGtdCDTiqewh.png">
+
+<link rel="canonical" href="http://blog.oiyou.net/2020/01/06/202001060028/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Servlet、Filter、Intecepter、Listener | Little By Little</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Little By Little" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little By Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">不积跬步无以至千里,不积小流无以成江海</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/HuangBoo461/huangboo461.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.oiyou.net/2020/01/06/202001060028/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/oiyou.png">
+      <meta itemprop="name" content="oiyou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little By Little">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Servlet、Filter、Intecepter、Listener
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-06 00:28:51" itemprop="dateCreated datePublished" datetime="2020-01-06T00:28:51+08:00">2020-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-08 01:00:27" itemprop="dateModified" datetime="2020-01-08T01:00:27+08:00">2020-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文介绍下SpringBoot中如何对这几者的注册与使用</p>
+<p>SpringBoot有两种方式注册Servlet、Filter、Listener</p>
+<p>1、代码注册：使用 ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean进行注册；</p>
+<p>2、 在 SpringBootApplication上添加@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通过 @WebServlet、@WebFilter、@WebListener 注解自动注册</p>
+<a id="more"></a>
+
+<h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>servlet是一个用户请求。</p>
+<p>servlet的匹配规则：从精确到模糊，匹配到之后不会管其他</p>
+<p>比如：servlet1的url-pattern 是/test，serlet2的url-pattern是/*,访问的url为 <a href="http://localhost:8080/test" target="_blank" rel="noopener">http://localhost:8080/test</a> ,容器就会先进行全路径匹配，发现正好被servlet1精确匹配，就不会去管servlet2</p>
+<h4 id="1、通过-ServletComponentScan自动扫描注册"><a href="#1、通过-ServletComponentScan自动扫描注册" class="headerlink" title="1、通过@ServletComponentScan自动扫描注册"></a>1、通过@ServletComponentScan自动扫描注册</h4><p>①在springboot入口程序除添加 @ServletComponentScan</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>②使用@WebServlet自定义Servlet，配置请求路径为/demo/servlet1</p>
+<p>可配置参数如下</p>
+<p><img src="https://i.loli.net/2020/01/06/lJxNGtdCDTiqewh.png" alt="可配置参数"></p>
+<p>代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(name = <span class="string">"myServlet1"</span>,urlPatterns = <span class="string">"/demo/servlet1"</span>,description = <span class="string">"自定义Servlet1"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"-----------MyServlet1---------doGet-------"</span>);</span><br><span class="line">        resp.getWriter().println(<span class="string">"myServlet1 request"</span>);</span><br><span class="line">        <span class="comment">//super.doGet(req, resp);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------MyServlet1---------doPost-------"</span>);</span><br><span class="line">        <span class="keyword">super</span>.doPost(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请求结果:</p>
+<p><img src="https://i.loli.net/2020/01/06/HDvUX8AfayQiSjw.png" alt="请求结果"></p>
+<h4 id="2、通过-ServletRegistrationBean注解注册"><a href="#2、通过-ServletRegistrationBean注解注册" class="headerlink" title="2、通过@ServletRegistrationBean注解注册"></a>2、通过@ServletRegistrationBean注解注册</h4><p>① 自定义Servler,此时只需继承HttpServlet即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------MyServlet2---------doGet-------"</span>);</span><br><span class="line">        resp.getWriter().println(<span class="string">"myServlet2 request"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------MyServlet2---------doPost-------"</span>);</span><br><span class="line">        <span class="keyword">super</span>.doPost(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>② 使用 ServletRegistrationBean注入bean</p>
+<p>注意：添加@Configuration是定义配置类，将ServletRegistrationBean注入容器即可实现Servlet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletRegistrationBean <span class="title">myServlet2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServletRegistrationBean(<span class="keyword">new</span> MyServlet2(),<span class="string">"/demo/servlet2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请求结果:</p>
+<p><img src="https://i.loli.net/2020/01/06/Z5cmX7lDiV8Cwke.png" alt="请求结果"></p>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>Filter：过滤器，对请求进行过滤，可对请求、响应进行修改。</p>
+<p>完整的流程是：<strong>Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对服务器响应进行后处理。</strong> </p>
+<p>多个过滤器组成过滤器调用链，按设置顺序执行，形成Filter链。</p>
+<p>Filter的作用：</p>
+<ol>
+<li>在请求到达Servlet之前，拦截客户传来的请求</li>
+<li>可以对请求进行检查、判断，亦可以进行修改</li>
+<li>在请求到达客户端之前，拦截响应</li>
+<li>可以对响应进行检查、判断、修改</li>
+</ol>
+<h4 id="1、通过-ServletComponentScan自动扫描注册-1"><a href="#1、通过-ServletComponentScan自动扫描注册-1" class="headerlink" title="1、通过@ServletComponentScan自动扫描注册"></a>1、通过@ServletComponentScan自动扫描注册</h4><p>① 在springboot入口程序除添加 @ServletComponentScan</p>
+<p>② 使用@WebFilter 配置处理全部url的Filter </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(filterName = <span class="string">"myFilter"</span>,urlPatterns = <span class="string">"/demo/servlet1"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFilter1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;myFilter init ……"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;执行过滤操作"</span>);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;myFilter destroy ……"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:启动时会执行init()方法，拦截到对应请求时执行doFilter()，web应用关闭时执行destroy()方法</p>
+<p><img src="https://i.loli.net/2020/01/07/SgU8Q7vfzKxs6rL.png" alt="init"></p>
+<p>doFilter()方法是过滤器的和核心方法，实现该方法就可以实现对用户请求进行预处理，也可以实现对服务器响应进行处理，他们的分界线为是否调用chain.doFilter()，<strong>执行该方法之前，对用户请求进行预处理，执行该方法之后，对服务器响应进行后处理</strong></p>
+<p><img src="https://i.loli.net/2020/01/07/l4VFQaWyS3BoNhZ.png" alt="doFilter"></p>
+<p>destroy:</p>
+<p><img src="https://i.loli.net/2020/01/07/JbWqdz5QSeiIGNP.png" alt="destroy"></p>
+<h4 id="2、使用FilterRegistrationBean"><a href="#2、使用FilterRegistrationBean" class="headerlink" title="2、使用FilterRegistrationBean"></a>2、使用FilterRegistrationBean</h4><ol>
+<li><p>使用@Bean注入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">myFilter2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        FilterRegistrationBean&lt;MyFilter2&gt; filterRegistrationBean = <span class="keyword">new</span> FilterRegistrationBean&lt;&gt;();</span><br><span class="line">        filterRegistrationBean.setFilter(<span class="keyword">new</span> MyFilter2());</span><br><span class="line">        filterRegistrationBean.addUrlPatterns(<span class="string">"/hello"</span>,<span class="string">"/test"</span>,<span class="string">"/demo/servlet2"</span>);</span><br><span class="line">        <span class="keyword">return</span> filterRegistrationBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>MyFilter2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFilter2</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyFilter2 init...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyFilter2 doFilter....former..."</span>);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        System.out.println(<span class="string">"MyFilter2 doFilter....after..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"myFilter destroy...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请求结果就不贴图了，测试结果与MyFilter类似。</p>
+</li>
+</ol>
+<h3 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h3><p>首先Listener是只能是以下几个接口的实现类，其中包括4个 EventListeners( ServletContextAttributeListener、ServletRequestAttributeListener、ServletRequestListener、HttpSessionAttributeListener)和2个 LifecycleListeners(ServletContextListener、HttpSessionListener)；</p>
+<ul>
+<li>ServletContextAttributeListener监听对ServletContext属性的操作，比如增加、删除、修改属性。</li>
+<li>ServletContextListener监听ServletContext。当创建ServletContext时，激发contextInitialized(ServletContextEvent sce)方法；当销毁ServletContext时，激发contextDestroyed(ServletContextEvent sce)方法。</li>
+<li>HttpSessionListener监听HttpSession的操作。当创建一个Session时，激发session Created(HttpSessionEvent se)方法；当销毁一个Session时，激发sessionDestroyed (HttpSessionEvent se)方法。</li>
+<li>HttpSessionAttributeListener监听HttpSession中的属性的操作。当在Session增加一个属性时，激发attributeAdded(HttpSessionBindingEvent se) 方法；当在Session删除一个属性时，激发attributeRemoved(HttpSessionBindingEvent se)方法；当在Session属性被重新设置时，激发attributeReplaced(HttpSessionBindingEvent se) 方法。</li>
+</ul>
+<h4 id="1、通过-ServletComponentScan自动扫描注册-2"><a href="#1、通过-ServletComponentScan自动扫描注册-2" class="headerlink" title="1、通过@ServletComponentScan自动扫描注册"></a>1、通过@ServletComponentScan自动扫描注册</h4><ol>
+<li><p>使用ServletListenerRegistrationBean注入bean</p>
+</li>
+<li><p>自定义Listener</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListener1</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent sce)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyListener1 contextInitialized....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent sce)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyListener1 contextDestroyed...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="https://i.loli.net/2020/01/08/MkOCaXVv941tRjz.png" alt="MyListener1"></p>
+</li>
+</ol>
+<h4 id="2、通过-ServletListenerRegistrationBean-注册"><a href="#2、通过-ServletListenerRegistrationBean-注册" class="headerlink" title="2、通过@ServletListenerRegistrationBean 注册"></a>2、通过@ServletListenerRegistrationBean 注册</h4><ol>
+<li><p>手动注册bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletListenerRegistrationBean <span class="title">myListener2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServletListenerRegistrationBean(<span class="keyword">new</span> MyListener2());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>自定义Listener</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListener2</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent sce)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyListener2 contextInitialized....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent sce)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"MyListener2 contextDestroyed...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://i.loli.net/2020/01/08/OW1F3sRae4wNDzh.png" alt="结果"></p>
+</li>
+</ol>
+<p>以上可得出三的运行顺序：Listener&gt;Filter&gt;Servlet</p>
+<h3 id="Intercepter"><a href="#Intercepter" class="headerlink" title="Intercepter"></a>Intercepter</h3><p><strong>拦截器只会处理DispatcherServlet处理的url</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;MyInterceptor preHandle"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;MyInterceptor postHandle"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;MyInterceptor afterCompletion"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注册拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> MyInterceptor()).addPathPatterns(<span class="string">"/**"</span>);</span><br><span class="line">        <span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>浏览器访问 <a href="http://localhost:8080/demo/servlet1" target="_blank" rel="noopener">http://localhost:8080/demo/servlet1</a> 此时MyInterceptor不会拦截，因为被自定义Servlet处理。</p>
+<p>访问其他未被自定义Servlet匹配的url，可以看到MyInterceptor输出。</p>
+<p>Intercepter生命周期详见： <a href="https://www.cnblogs.com/junzi2099/p/8022058.html" target="_blank" rel="noopener">https://www.cnblogs.com/junzi2099/p/8022058.html</a> </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/springboot基础/" rel="tag"># springboot基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/19/201912190030/" rel="prev" title="网页标题搞怪特效">
+      <i class="fa fa-chevron-left"></i> 网页标题搞怪特效
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet"><span class="nav-number">1.</span> <span class="nav-text">Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、通过-ServletComponentScan自动扫描注册"><span class="nav-number">1.1.</span> <span class="nav-text">1、通过@ServletComponentScan自动扫描注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、通过-ServletRegistrationBean注解注册"><span class="nav-number">1.2.</span> <span class="nav-text">2、通过@ServletRegistrationBean注解注册</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter"><span class="nav-number">2.</span> <span class="nav-text">Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、通过-ServletComponentScan自动扫描注册-1"><span class="nav-number">2.1.</span> <span class="nav-text">1、通过@ServletComponentScan自动扫描注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、使用FilterRegistrationBean"><span class="nav-number">2.2.</span> <span class="nav-text">2、使用FilterRegistrationBean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listener"><span class="nav-number">3.</span> <span class="nav-text">Listener</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、通过-ServletComponentScan自动扫描注册-2"><span class="nav-number">3.1.</span> <span class="nav-text">1、通过@ServletComponentScan自动扫描注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、通过-ServletListenerRegistrationBean-注册"><span class="nav-number">3.2.</span> <span class="nav-text">2、通过@ServletListenerRegistrationBean 注册</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intercepter"><span class="nav-number">4.</span> <span class="nav-text">Intercepter</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="oiyou"
+      src="/images/oiyou.png">
+  <p class="site-author-name" itemprop="name">oiyou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">浙ICP备19040323号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">oiyou</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'dcc4b208cb6a7654f2a5',
+      clientSecret: '038a225dcc46e58448043c07f4cb20bf8542dd87',
+      repo: 'huangboo461.github.io',
+      owner: 'huangboo461',
+      admin: ['huangboo461'],
+      id: 'c31092519962675b5c0c0a27d198e9da',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/oiyou/tittlecheat.js"></script>
+</body>
+</html>
