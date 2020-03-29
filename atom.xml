@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oiyou.net/"/>
-  <updated>2020-03-26T16:58:08.568Z</updated>
+  <updated>2020-03-29T05:29:42.485Z</updated>
   <id>http://blog.oiyou.net/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fastjson转换泛型问题</title>
+    <link href="http://blog.oiyou.net/2020/03/29/202003291137/"/>
+    <id>http://blog.oiyou.net/2020/03/29/202003291137/</id>
+    <published>2020-03-29T03:38:04.000Z</published>
+    <updated>2020-03-29T05:29:42.485Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Java开发中经常遇到数据对接的情形，通过接口请求返回json数据，然后对数据进行解析处理，为了通用，经常会有一个通用返回结果类 </p><a id="more"></a><p>如下</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReturnResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Boolean status;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getStatus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStatus</span><span class="params">(Boolean status)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReturnResult</span><span class="params">(Boolean status, String message, T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ReturnResult&lt;T&gt; <span class="title">getSuccess</span><span class="params">(String message, T t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ReturnResult&lt;&gt;(<span class="keyword">true</span>,message,t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中包含有泛型，当直接使用fastjson解析，实体类使用该工具类时就会出现其中的泛型未转换成功的情况。</p><p>此时只要这么写就可以转换成功了</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ReturnResult&lt;User&gt; returnResult =</span><br><span class="line">    JSONObject.parseObject(ss, <span class="keyword">new</span> TypeReference&lt;ReturnResult&lt;User&gt;&gt;()&#123;&#125;);</span><br></pre></td></tr></table></figure><p>其中泛型的数据也会转换成功</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在Java开发中经常遇到数据对接的情形，通过接口请求返回json数据，然后对数据进行解析处理，为了通用，经常会有一个通用返回结果类 &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://blog.oiyou.net/categories/java/"/>
+    
+    
+      <category term="fastjson" scheme="http://blog.oiyou.net/tags/fastjson/"/>
+    
+  </entry>
   
   <entry>
     <title>docker重启后自动重启容器</title>
