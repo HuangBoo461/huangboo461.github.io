@@ -48,18 +48,18 @@
 <!-- jquery -->
 <script src="/js/jquery/jquery-3.4.1.min.js"></script>
 
-  <meta name="description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。 通过访问官方说明文档可以看到以下内容:官网地址 Spring Boot为Spring MVC提供了自动配置 自动配置在Spring的默认值之上添加了以">
+  <meta name="description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。">
 <meta name="keywords" content="自动配置类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebMvcAutoConfiguration自动配置">
 <meta property="og:url" content="http://blog.oiyou.net/2020/04/09/202004090011/index.html">
 <meta property="og:site_name" content="Little By Little">
-<meta property="og:description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。 通过访问官方说明文档可以看到以下内容:官网地址 Spring Boot为Spring MVC提供了自动配置 自动配置在Spring的默认值之上添加了以">
+<meta property="og:description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-08T17:00:06.419Z">
+<meta property="og:updated_time" content="2020-04-21T23:16:46.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebMvcAutoConfiguration自动配置">
-<meta name="twitter:description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。 通过访问官方说明文档可以看到以下内容:官网地址 Spring Boot为Spring MVC提供了自动配置 自动配置在Spring的默认值之上添加了以">
+<meta name="twitter:description" content="​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。">
 
 <link rel="canonical" href="http://blog.oiyou.net/2020/04/09/202004090011/">
 
@@ -209,10 +209,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-09 00:12:07 / 修改时间：01:00:06" itemprop="dateCreated datePublished" datetime="2020-04-09T00:12:07+08:00">2020-04-09</time>
+              <time title="创建时间：2020-04-09 00:12:07" itemprop="dateCreated datePublished" datetime="2020-04-09T00:12:07+08:00">2020-04-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-22 07:16:46" itemprop="dateModified" datetime="2020-04-22T07:16:46+08:00">2020-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -237,6 +243,8 @@
 
       
         <p>​        今天来学习下WebMvcAutoConfiguration的自动配置,Spring mvc在web开发过程中是被使用最多的，开发中的各种各样的请求都跟spring mvc有关，所以有必要研究下spring boot中的这个配置类。</p>
+<a id="more"></a>
+
 <p>通过访问官方说明文档可以看到以下内容:<a href="https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/html/spring-boot-features.html#boot-features-spring-mvc-auto-configuration" target="_blank" rel="noopener">官网地址</a></p>
 <p>Spring Boot为Spring MVC提供了自动配置</p>
 <p>自动配置在Spring的默认值之上添加了以下功能</p>
@@ -287,8 +295,16 @@
 </ul>
 <p>  如果要完全控制 Spring MVC 可以添加自己的@Configuration 同时添加注解@EnableWebMvc</p>
 <p>  不建议全面控制Spring MVC</p>
-<p>  暂时先这些 后续再更新</p>
+<p>  此外 还有一些静态资源的配置</p>
+<p>  静态资源映射</p>
+<p>  默认支持对webjars的路径映射和其他静态资源路径映射</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">    //是否启用默认的资源路径映射</span><br><span class="line">	if (!this.resourceProperties.isAddMappings()) &#123;</span><br><span class="line">		logger.debug(&quot;Default resource handling disabled&quot;);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	Duration cachePeriod = this.resourceProperties.getCache().getPeriod();</span><br><span class="line">	CacheControl cacheControl = this.resourceProperties.getCache().getCachecontrol().toHttpCacheControl();</span><br><span class="line">	//如果未注册 /webjars/** 则执行</span><br><span class="line">	if (!registry.hasMappingForPattern(&quot;/webjars/**&quot;)) &#123;</span><br><span class="line">		customizeResourceHandlerRegistration(registry.addResourceHandler(&quot;/webjars/**&quot;)</span><br><span class="line">				.addResourceLocations(&quot;classpath:/META-INF/resources/webjars/&quot;)</span><br><span class="line">				.setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));</span><br><span class="line">	&#125;</span><br><span class="line">	/** 静态资源路径</span><br><span class="line">	String[] CLASSPATH_RESOURCE_LOCATIONS = &#123; &quot;classpath:/META-INF/resources/&quot;,</span><br><span class="line">			&quot;classpath:/resources/&quot;, &quot;classpath:/static/&quot;, &quot;classpath:/public/&quot; &#125;;</span><br><span class="line">	*/</span><br><span class="line">	//默认静态资源路径映射</span><br><span class="line">	String staticPathPattern = this.mvcProperties.getStaticPathPattern();</span><br><span class="line">	if (!registry.hasMappingForPattern(staticPathPattern)) &#123;</span><br><span class="line">		customizeResourceHandlerRegistration(registry.addResourceHandler(staticPathPattern)</span><br><span class="line">				.addResourceLocations(getResourceLocations(this.resourceProperties.getStaticLocations()))</span><br><span class="line">				.setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+<p>  默认首页配置<br><br>  spring boot 默认配置了对首页的支持,只需要在静态或模板引擎文件夹下放index.html或index文件即可<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public WelcomePageHandlerMapping welcomePageHandlerMapping(ApplicationContext applicationContext,</span><br><span class="line">		FormattingConversionService mvcConversionService, ResourceUrlProvider mvcResourceUrlProvider) &#123;</span><br><span class="line">	//然后看这个构造函数</span><br><span class="line">	WelcomePageHandlerMapping welcomePageHandlerMapping = new WelcomePageHandlerMapping(</span><br><span class="line">			new TemplateAvailabilityProviders(applicationContext), applicationContext, getWelcomePage(),</span><br><span class="line">			this.mvcProperties.getStaticPathPattern());</span><br><span class="line">	welcomePageHandlerMapping.setInterceptors(getInterceptors(mvcConversionService, mvcResourceUrlProvider));</span><br><span class="line">	return welcomePageHandlerMapping;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private Optional&lt;Resource&gt; getWelcomePage() &#123;</span><br><span class="line">	String[] locations = getResourceLocations(this.resourceProperties.getStaticLocations());</span><br><span class="line">	return Arrays.stream(locations).map(this::getIndexHtml).filter(this::isReadable).findFirst();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private Resource getIndexHtml(String location) &#123;</span><br><span class="line">	return this.resourceLoader.getResource(location + &quot;index.html&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  WelcomePageHandlerMapping 构造函数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WelcomePageHandlerMapping(TemplateAvailabilityProviders templateAvailabilityProviders,</span><br><span class="line">			ApplicationContext applicationContext, Optional&lt;Resource&gt; welcomePage, String staticPathPattern) &#123;</span><br><span class="line">	//获取静态路径下的index.html</span><br><span class="line">	if (welcomePage.isPresent() &amp;&amp; &quot;/**&quot;.equals(staticPathPattern)) &#123;</span><br><span class="line">		logger.info(&quot;Adding welcome page: &quot; + welcomePage.get());</span><br><span class="line">		setRootViewName(&quot;forward:index.html&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	//获取模板引擎下的index文件</span><br><span class="line">	else if (welcomeTemplateExists(templateAvailabilityProviders, applicationContext)) &#123;</span><br><span class="line">		logger.info(&quot;Adding welcome page template: index&quot;);</span><br><span class="line">		setRootViewName(&quot;index&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
