@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oiyou.net/"/>
-  <updated>2020-04-23T15:33:41.582Z</updated>
+  <updated>2020-04-23T16:22:39.011Z</updated>
   <id>http://blog.oiyou.net/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows环境单机搭建zookeeper与kafka</title>
+    <link href="http://blog.oiyou.net/2020/04/24/202004240012/"/>
+    <id>http://blog.oiyou.net/2020/04/24/202004240012/</id>
+    <published>2020-04-23T16:12:46.000Z</published>
+    <updated>2020-04-23T16:22:39.011Z</updated>
+    
+    <content type="html"><![CDATA[<p>./bin/windows/kafaka-topics.bat –zookeeper 127.0.0.1:2181 –topic first –partitions 2 –replication-factor 1 –create</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;./bin/windows/kafaka-topics.bat –zookeeper 127.0.0.1:2181 –topic first –partitions 2 –replication-factor 1 –create&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="zookeeper" scheme="http://blog.oiyou.net/categories/zookeeper/"/>
+    
+      <category term="kafka" scheme="http://blog.oiyou.net/categories/zookeeper/kafka/"/>
+    
+    
+      <category term="分布式" scheme="http://blog.oiyou.net/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>HttpMessageConvertersAutoConfiguration自动配置类</title>
