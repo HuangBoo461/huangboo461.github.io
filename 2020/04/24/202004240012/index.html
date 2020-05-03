@@ -48,19 +48,19 @@
 <!-- jquery -->
 <script src="/js/jquery/jquery-3.4.1.min.js"></script>
 
-  <meta name="description" content="本文介绍下kafka常用的命令">
+  <meta name="description" content="本文介绍下kafka部分配置 启动以及部分命令测试">
 <meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="windows环境单机搭建zookeeper与kafka">
+<meta property="og:title" content="windows环境单机搭建kafka配置与测试">
 <meta property="og:url" content="http://blog.oiyou.net/2020/04/24/202004240012/index.html">
 <meta property="og:site_name" content="Little By Little">
-<meta property="og:description" content="本文介绍下kafka常用的命令">
+<meta property="og:description" content="本文介绍下kafka部分配置 启动以及部分命令测试">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2020/04/24/MHfQgXsce5UoWwE.png">
-<meta property="og:updated_time" content="2020-04-26T16:36:43.489Z">
+<meta property="og:updated_time" content="2020-05-03T01:11:08.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="windows环境单机搭建zookeeper与kafka">
-<meta name="twitter:description" content="本文介绍下kafka常用的命令">
+<meta name="twitter:title" content="windows环境单机搭建kafka配置与测试">
+<meta name="twitter:description" content="本文介绍下kafka部分配置 启动以及部分命令测试">
 <meta name="twitter:image" content="https://i.loli.net/2020/04/24/MHfQgXsce5UoWwE.png">
 
 <link rel="canonical" href="http://blog.oiyou.net/2020/04/24/202004240012/">
@@ -75,7 +75,7 @@
   };
 </script>
 
-  <title>windows环境单机搭建zookeeper与kafka | Little By Little</title>
+  <title>windows环境单机搭建kafka配置与测试 | Little By Little</title>
   
 
 
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          windows环境单机搭建zookeeper与kafka
+          windows环境单机搭建kafka配置与测试
         </h1>
 
         <div class="post-meta">
@@ -219,7 +219,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-27 00:36:43" itemprop="dateModified" datetime="2020-04-27T00:36:43+08:00">2020-04-27</time>
+                <time title="修改时间：2020-05-03 09:11:08" itemprop="dateModified" datetime="2020-05-03T09:11:08+08:00">2020-05-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,13 +227,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper/kafka/" itemprop="url" rel="index">
+                  <a href="/categories/kafka/" itemprop="url" rel="index">
                     <span itemprop="name">kafka</span>
                   </a>
                 </span>
@@ -250,47 +244,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文介绍下kafka常用的命令</p>
+        <p>本文介绍下kafka部分配置 启动以及部分命令测试</p>
 <a id="more"></a>
 
 <p>首先下载zookeeper与kafka 选择版本下载即可</p>
 <p>地址如下 <a href="https://zookeeper.apache.org/releases.html/" target="_blank" rel="noopener">zookeeper下载地址</a> <a href="https://kafka.apache.org/downloads" target="_blank" rel="noopener">kafka下载地址</a></p>
 <p>下载完成后需要进行简单配置</p>
-<p>zookeeper配置</p>
-<p>zookeeper启动</p>
-<p>kafka配置</p>
-<p>kafka 启动</p>
-<p>windows</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##首先需要进入kafka目录</span><br><span class="line">.\bin/kafka-server-start.sh -daemon ./config/server.properties</span><br></pre></td></tr></table></figure>
+<p>zookeeper配置与启动见另一篇文章</p>
+<h4 id="kafka配置"><a href="#kafka配置" class="headerlink" title="kafka配置"></a>kafka配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">###进入config目录 修改server.properties文件</span><br><span class="line"># 表示broker的id 必须为不重复的数字</span><br><span class="line">broker.id=0</span><br><span class="line"># 此处参数名虽为日志 但是其实是数据保存路径 日志文件夹(logs)会自动生成</span><br><span class="line">log.dirs=D:/MyWeb/kafka_2.13-2.5.0/tmp/kafka-logs</span><br><span class="line"># 配置注册中心地址 端口</span><br><span class="line">zookeeper.connect=127.0.0.1:2181</span><br></pre></td></tr></table></figure>
+
+<h4 id="kafka-启动"><a href="#kafka-启动" class="headerlink" title="kafka 启动"></a>kafka 启动</h4><p>windows</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##首先需要进入kafka目录</span><br><span class="line">.\bin\kafka-server-start.sh -daemon .\config\server.properties</span><br></pre></td></tr></table></figure>
 
 <p>linux</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##首先需要进入kafka目录</span><br><span class="line">./bin/kafka-server-start.sh -daemon ./config/server.properties</span><br></pre></td></tr></table></figure>
 
 <p>以下在windows环境测试</p>
-<p>创建topic</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数说明:</span><br><span class="line">--topic 主题 设置主题名称 不可重复</span><br><span class="line">--zookeeper zookeeper地址</span><br><span class="line">--partiotions 分区数 默认是1(配置在server.properties中)</span><br><span class="line">--replication-factor 副本数 不得多于broker的个数 默认值是1</span><br><span class="line">--create 指明为创建</span><br><span class="line">.\bin\windows\kafka-topics.bat --topic oiyou --zookeeper 127.0.0.1:2181 --partitions 2 --replication-factor 1 --create</span><br></pre></td></tr></table></figure>
+<h4 id="创建topic"><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数说明:</span><br><span class="line">--topic 主题 设置主题名称 不可重复</span><br><span class="line">--zookeeper zookeeper地址</span><br><span class="line">--partiotions 分区数 默认是1(配置在server.properties中)</span><br><span class="line">--replication-factor 副本数 不得多于broker的个数 默认值是1</span><br><span class="line">--create 指明为创建</span><br><span class="line">.\bin\windows\kafka-topics.bat --topic oiyou --zookeeper 127.0.0.1:2181 --partitions 2 --replication-factor 1 --create</span><br></pre></td></tr></table></figure>
 
-<p>查看topic列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--zookeeper 指定zookeeper地址</span><br><span class="line">--list 指明是查询列表</span><br><span class="line">.\bin\windows\kafka-topices.bat --zookeeper 127.0.0.1:2181 --list</span><br></pre></td></tr></table></figure>
+<h4 id="查看topic列表"><a href="#查看topic列表" class="headerlink" title="查看topic列表"></a>查看topic列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--zookeeper 指定zookeeper地址</span><br><span class="line">--list 指明是查询列表</span><br><span class="line">.\bin\windows\kafka-topices.bat --zookeeper 127.0.0.1:2181 --list</span><br></pre></td></tr></table></figure>
 
-<p>查看单个topic</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--describe 详情</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --topic oiyou --describe</span><br></pre></td></tr></table></figure>
+<h4 id="查看单个topic"><a href="#查看单个topic" class="headerlink" title="查看单个topic"></a>查看单个topic</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--describe 详情</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --topic oiyou --describe</span><br></pre></td></tr></table></figure>
 
-<p>增加topic的partition </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--alter 表明修改</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --alter --topic oiyou --partitions 5</span><br></pre></td></tr></table></figure>
+<h4 id="增加topic的partition"><a href="#增加topic的partition" class="headerlink" title="增加topic的partition"></a>增加topic的partition</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--alter 表明修改</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --alter --topic oiyou --partitions 5</span><br></pre></td></tr></table></figure>
 
-<p>删除topic</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--delete 表明删除(删除的话需要删除zookeeper和kafka相关数据)</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --topic me --delete</span><br></pre></td></tr></table></figure>
+<h4 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--delete 表明删除(删除的话需要删除zookeeper和kafka相关数据)</span><br><span class="line">.\bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --topic me --delete</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2020/04/24/MHfQgXsce5UoWwE.png" alt="图片"></p>
 <p>发送消息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--broker-list 127.0.0.1:9092 需要使用kafka配置的端口 默认是9092</span><br><span class="line">.\bin\windows\kafka-console-producer.bat --broker-list 127.0.0.1:9092 --topic me</span><br></pre></td></tr></table></figure>
 
-<p>消费消息 从头开始</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--</span><br><span class="line">--bootstrap-server 指定kafka地址 用于消费</span><br><span class="line">--from-beginning 从头开始</span><br><span class="line">.\bin\windows\kafka-console-consumer.bat --bootstrap-server 127.0.0.1:9092 --topic oiyou --from-beginning</span><br></pre></td></tr></table></figure>
+<h4 id="消费消息-从头开始"><a href="#消费消息-从头开始" class="headerlink" title="消费消息 从头开始"></a>消费消息 从头开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">参数说明</span><br><span class="line">--</span><br><span class="line">--bootstrap-server 指定kafka地址 用于消费</span><br><span class="line">--from-beginning 从头开始</span><br><span class="line">.\bin\windows\kafka-console-consumer.bat --bootstrap-server 127.0.0.1:9092 --topic oiyou --from-beginning</span><br></pre></td></tr></table></figure>
 
-<p>从尾部消费</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\bin\windows\kafka-console-consumer.bat --bootstrap-server 127.0.0.1:9091 --topic oiyou --offset latest --partition 0</span><br></pre></td></tr></table></figure>
+<h4 id="从尾部消费"><a href="#从尾部消费" class="headerlink" title="从尾部消费"></a>从尾部消费</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\bin\windows\kafka-console-consumer.bat --bootstrap-server 127.0.0.1:9091 --topic oiyou --offset latest --partition 0</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -311,7 +299,10 @@
     <a href="/2020/04/22/202004220722/" rel="prev" title="HttpMessageConvertersAutoConfiguration自动配置类">
       <i class="fa fa-chevron-left"></i> HttpMessageConvertersAutoConfiguration自动配置类
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/03/202005030900/" rel="next" title="windows环境下zookeeper的配置与常用客户端命令">
+      windows环境下zookeeper的配置与常用客户端命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -372,6 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka配置"><span class="nav-number">1.</span> <span class="nav-text">kafka配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka-启动"><span class="nav-number">2.</span> <span class="nav-text">kafka 启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建topic"><span class="nav-number">3.</span> <span class="nav-text">创建topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看topic列表"><span class="nav-number">4.</span> <span class="nav-text">查看topic列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看单个topic"><span class="nav-number">5.</span> <span class="nav-text">查看单个topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加topic的partition"><span class="nav-number">6.</span> <span class="nav-text">增加topic的partition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除topic"><span class="nav-number">7.</span> <span class="nav-text">删除topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消费消息-从头开始"><span class="nav-number">8.</span> <span class="nav-text">消费消息 从头开始</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从尾部消费"><span class="nav-number">9.</span> <span class="nav-text">从尾部消费</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -387,7 +379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

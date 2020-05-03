@@ -48,20 +48,20 @@
 <!-- jquery -->
 <script src="/js/jquery/jquery-3.4.1.min.js"></script>
 
-  <meta name="description" content="由于本人刚开始学习docker没多久,每此docker重启后都需要手动启动容器，很麻烦 本文记录下如何在docker重启后自动重启容器">
-<meta name="keywords" content="docker">
+  <meta name="description" content="本文主要介绍下zookeeper的安装部署，以及部分常用的客户端命令">
+<meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker重启后自动重启容器">
-<meta property="og:url" content="http://blog.oiyou.net/2020/03/27/202003270050/index.html">
+<meta property="og:title" content="windows环境下zookeeper的配置与常用客户端命令">
+<meta property="og:url" content="http://blog.oiyou.net/2020/05/03/202005030900/index.html">
 <meta property="og:site_name" content="Little By Little">
-<meta property="og:description" content="由于本人刚开始学习docker没多久,每此docker重启后都需要手动启动容器，很麻烦 本文记录下如何在docker重启后自动重启容器">
+<meta property="og:description" content="本文主要介绍下zookeeper的安装部署，以及部分常用的客户端命令">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-26T16:58:08.568Z">
+<meta property="og:updated_time" content="2020-05-03T01:42:19.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker重启后自动重启容器">
-<meta name="twitter:description" content="由于本人刚开始学习docker没多久,每此docker重启后都需要手动启动容器，很麻烦 本文记录下如何在docker重启后自动重启容器">
+<meta name="twitter:title" content="windows环境下zookeeper的配置与常用客户端命令">
+<meta name="twitter:description" content="本文主要介绍下zookeeper的安装部署，以及部分常用的客户端命令">
 
-<link rel="canonical" href="http://blog.oiyou.net/2020/03/27/202003270050/">
+<link rel="canonical" href="http://blog.oiyou.net/2020/05/03/202005030900/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>docker重启后自动重启容器 | Little By Little</title>
+  <title>windows环境下zookeeper的配置与常用客户端命令 | Little By Little</title>
   
 
 
@@ -187,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.oiyou.net/2020/03/27/202003270050/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oiyou.net/2020/05/03/202005030900/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/oiyou.png">
@@ -200,7 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          docker重启后自动重启容器
+          windows环境下zookeeper的配置与常用客户端命令
         </h1>
 
         <div class="post-meta">
@@ -211,7 +211,18 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-27 00:51:06 / 修改时间：00:58:08" itemprop="dateCreated datePublished" datetime="2020-03-27T00:51:06+08:00">2020-03-27</time>
+              <time title="创建时间：2020-05-03 08:58:25 / 修改时间：09:42:19" itemprop="dateCreated datePublished" datetime="2020-05-03T08:58:25+08:00">2020-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -225,14 +236,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>由于本人刚开始学习docker没多久,每此docker重启后都需要手动启动容器，很麻烦</p>
-<p>本文记录下如何在docker重启后自动重启容器</p>
+        <p>本文主要介绍下zookeeper的安装部署，以及部分常用的客户端命令</p>
 <a id="more"></a>
 
-<p>有两种方式</p>
-<h3 id="1、在创建容器时加入参数"><a href="#1、在创建容器时加入参数" class="headerlink" title="1、在创建容器时加入参数"></a>1、在创建容器时加入参数</h3><p>在创建容器时添加 <code>--restart=always</code>即可</p>
-<h3 id="2、对于已经创建的容器可以更新"><a href="#2、对于已经创建的容器可以更新" class="headerlink" title="2、对于已经创建的容器可以更新"></a>2、对于已经创建的容器可以更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker container update --restart=always 容器名或id</span><br></pre></td></tr></table></figure>
+<p>首先下载zookeeper 选择版本下载即可</p>
+<p>地址如下 <a href="https://zookeeper.apache.org/releases.html/" target="_blank" rel="noopener">zookeeper下载地址</a></p>
+<p>下载完成后解压即可</p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>下载完成后在conf文件夹下可以看到一个zoo_sample.cfg文件 需要复制此文件并改名为zoo.cfg，然后做一下配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对部分配置做以下说明 其余使用默认即可</span></span><br><span class="line"><span class="comment"># 数据放置路径</span></span><br><span class="line"><span class="attr">dataDir</span>=<span class="string">D:/MyWeb/zookeeper-3.4.11/tmp/zookeeper</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zookeeper端口 对cline端提供服务</span></span><br><span class="line"><span class="attr">clientPort</span>=<span class="string">2181</span></span><br><span class="line"><span class="comment"># 如果要集群的话添加如下配置即可,其中2888端口作用为选举leader使用，3888作用为集群内机器通讯使用(Leader监听此端口) 另外集群时还要注意zookeeper的半数机制</span></span><br><span class="line"><span class="comment">#server.0=192.168.146.200:2888:3888</span></span><br><span class="line"><span class="comment">#server.1=192.168.146.201:2888:3888</span></span><br><span class="line"><span class="comment">#server.2=192.168.146.202:2888:3888</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接执行以下命令即可 可以指定连接地址 默认使用本地</span></span><br><span class="line">.\bin\zkServer.cmd</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端启动"><a href="#客户端启动" class="headerlink" title="客户端启动"></a>客户端启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\zkCli.cmd --server 127.0.0.1:2181</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端常用命令"><a href="#客户端常用命令" class="headerlink" title="客户端常用命令"></a>客户端常用命令</h4><pre><code>##### 显示所有命令</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 客户端连接成功后</span></span><br><span class="line">h或者<span class="built_in">help</span></span><br><span class="line"><span class="comment"># 会显示如下命令</span></span><br><span class="line"><span class="built_in">stat</span> path [watch]</span><br><span class="line"><span class="built_in">set</span> path data [version]</span><br><span class="line">ls path [watch]</span><br><span class="line">delquota [-n|-b] path</span><br><span class="line">ls2 path [watch]</span><br><span class="line">setAcl path acl</span><br><span class="line">setquota -n|-b val path</span><br><span class="line"><span class="built_in">history</span></span><br><span class="line">redo cmdno</span><br><span class="line">printwatches on|off</span><br><span class="line">delete path [version]</span><br><span class="line">sync path</span><br><span class="line">listquota path</span><br><span class="line">rmr path</span><br><span class="line">get path [watch]</span><br><span class="line">create [-s] [-e] path data acl</span><br><span class="line">addauth scheme auth</span><br><span class="line">quit</span><br><span class="line">getAcl path</span><br><span class="line">close</span><br><span class="line">connect host:port</span><br></pre></td></tr></table></figure>
+
+<h5 id="ls-path"><a href="#ls-path" class="headerlink" title="ls path"></a>ls path</h5><p>查看某个节点下的所有节点信息</p>
+<p>ls /</p>
+<p>列出根节点下所有节点信息</p>
+<h5 id="stat-path"><a href="#stat-path" class="headerlink" title="stat path"></a>stat path</h5><p>获取指定节点的状态信息</p>
+<h5 id="get-path"><a href="#get-path" class="headerlink" title="get path"></a>get path</h5><p>获取当前节点的数据内容</p>
+<h5 id="ls2-path"><a href="#ls2-path" class="headerlink" title="ls2 path"></a>ls2 path</h5><p>是ls与stat的结合</p>
+<h5 id="create-s-e-path-data-acl"><a href="#create-s-e-path-data-acl" class="headerlink" title="create [-s] [-e] path data acl"></a>create [-s] [-e] path data acl</h5><p>-s 表示顺序节点 -e 表示临时节点 -path 节点路径 data 节点数据 -acl 节点权限</p>
+<p>注:有-e参数的节点会在客户端退出时 自动小时</p>
+<h5 id="quit"><a href="#quit" class="headerlink" title="quit"></a>quit</h5><p>退出客户端</p>
+<h5 id="set-path-data-version"><a href="#set-path-data-version" class="headerlink" title="set path data [version]"></a>set path data [version]</h5><p>修改节点的数据内容 如果指定版本，需要和当前节点的数据版本一致</p>
+<h5 id="delete-path-version"><a href="#delete-path-version" class="headerlink" title="delete path [version]"></a>delete path [version]</h5><p>删除指定路径的节点 如果有子节点要先删除子节点</p>
+<h5 id="rmr-path"><a href="#rmr-path" class="headerlink" title="rmr path"></a>rmr path</h5><p>删除当前路径节点 及其所有子节点</p>
+<p>​    </p>
 
     </div>
 
@@ -242,7 +273,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/分布式/" rel="tag"># 分布式</a>
           </div>
 
         
@@ -251,13 +282,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/08/202001080116/" rel="prev" title="SpringBoot自动配置类">
-      <i class="fa fa-chevron-left"></i> SpringBoot自动配置类
+    <a href="/2020/04/24/202004240012/" rel="prev" title="windows环境单机搭建kafka配置与测试">
+      <i class="fa fa-chevron-left"></i> windows环境单机搭建kafka配置与测试
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/29/202003291137/" rel="next" title="fastjson转换泛型问题">
-      fastjson转换泛型问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -318,7 +346,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、在创建容器时加入参数"><span class="nav-number">1.</span> <span class="nav-text">1、在创建容器时加入参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、对于已经创建的容器可以更新"><span class="nav-number">2.</span> <span class="nav-text">2、对于已经创建的容器可以更新</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件"><span class="nav-number">1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务启动"><span class="nav-number">2.</span> <span class="nav-text">服务启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端启动"><span class="nav-number">3.</span> <span class="nav-text">客户端启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端常用命令"><span class="nav-number">4.</span> <span class="nav-text">客户端常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ls-path"><span class="nav-number">4.1.</span> <span class="nav-text">ls path</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stat-path"><span class="nav-number">4.2.</span> <span class="nav-text">stat path</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get-path"><span class="nav-number">4.3.</span> <span class="nav-text">get path</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ls2-path"><span class="nav-number">4.4.</span> <span class="nav-text">ls2 path</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#create-s-e-path-data-acl"><span class="nav-number">4.5.</span> <span class="nav-text">create [-s] [-e] path data acl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#quit"><span class="nav-number">4.6.</span> <span class="nav-text">quit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set-path-data-version"><span class="nav-number">4.7.</span> <span class="nav-text">set path data [version]</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#delete-path-version"><span class="nav-number">4.8.</span> <span class="nav-text">delete path [version]</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rmr-path"><span class="nav-number">4.9.</span> <span class="nav-text">rmr path</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -435,7 +463,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo: 'huangboo461.github.io',
       owner: 'huangboo461',
       admin: ['huangboo461'],
-      id: '8730d10c89a8aaf07259aa19b9d1ab3a',
+      id: 'effa147f81865150f81f4429ecff529c',
         language: 'zh-CN',
       distractionFreeMode: 'true'
     });
